@@ -65,7 +65,7 @@ Un des plus gros projets utilisant Git, le kernel Linux, nécessite de plus en p
 Beaucoup de gens se soucient qu'à un moment donné ils auront, par des circonstances hasardeuses, deux objets dans leur référentiel de hachage de même empreinte SHA-1.
 Qu'en est-il réellement ?
 
-S'il vous arrivait de consigner (*commit*) un objet qui se hache de la même empreinte SHA-1 d'un objet existant dans votre référentiel, Git verrez l'objet existant déjà dans votre base de données et Git présumera qu'il était déjà enregistré.
+S'il vous arrivait de consigner (*commit*) un objet qui se hache de la même empreinte SHA-1 qu'un objet existant dans votre référentiel, Git verrait l'objet existant déjà dans votre base de données et Git présumera qu'il était déjà enregistré.
 Si vous essayez de récupérer l'objet de nouveau à un moment donné, vous aurez toujours les données du premier objet.
 
 Quoi qu'il en soit, vous devriez être conscient à quel point ce scénario est ridiculement improbable.
@@ -228,7 +228,7 @@ Par exemple, disons que votre historique ressemble à celui de la Figure 6-1.
 Insert 18333fig0601.png 
 Figure 6-1. Exemple d'historique pour la sélection de plages de commits.
 
-Si vous voulez savoir ce que n'a pas encore été fusionné sur votre branche master depuis votre branche `experiment`, vous pouvez demandez à Git de vous montrer un listing des commits avec `master..experiment` — ce qui signifie "tous les commits accessibles par experiment qui ne le sont pas par master.".
+Si vous voulez savoir ce qui n'a pas encore été fusionné sur votre branche master depuis votre branche `experiment`, vous pouvez demandez à Git de vous montrer un listing des commits avec `master..experiment` — ce qui signifie "tous les commits accessibles par experiment qui ne le sont pas par master.".
 Dans un souci de brièveté et de clarté de ces exemples, je vais utiliser les lettres des commits issus du diagramme à la place du vrai listing dans l'ordre où ils auraient dû être affichés :
 
 	$ git log master..experiment
@@ -242,7 +242,7 @@ D'un autre côté, si vous souhaitez voir l'opposé — tous les commits dans `m
 	E
 
 C'est pratique si vous souhaitez maintenir `experiment` à jour et anticiper les fusions.
-Une autre cas d'utilisation fréquent et de voir ce que vous vous appréter à pousser sur une branche distante :
+Une autre cas d'utilisation fréquent et de voir ce que vous vous apprétez à pousser sur une branche distante :
 
 	$ git log origin/master..HEAD
 
@@ -253,8 +253,8 @@ Par exemple, vous pouvez obtenir les mêmes résultats que précédemment en tap
 
 #### Emplacements multiples ####
 
-La syntaxe double-point est pratique comme raccourci; mais peut-être souhaitez-vous utiliser plus d'une branche pour spécifier une révision, comme pour voir quels commits sont dans plusieurs branches mais qui sont absents de la branche courante.
-Git vous permets cela avec `^` or `--not` en préfixe de toute référence de laquelle vous ne souhaitez pas voir les commits.
+La syntaxe double-point est pratique comme raccourci; mais peut-être souhaitez-vous utiliser plus d'une branche pour spécifier une révision, comme pour voir quels commits sont dans plusieurs branches mais sont absents de la branche courante.
+Git vous permet cela avec `^` or `--not` en préfixe de toute référence de laquelle vous ne souhaitez pas voir les commits.
 Les 3 commandes ci-après sont équivalentes :
 
 	$ git log refA..refB
@@ -271,7 +271,7 @@ Ceci vous fournit un système de requêtage des révisions très puissant, pour 
 
 #### Triple point ####
 
-La dernière syntaxe majeure de sélection de plage de commits est la syntaxe triple-point, qui spécifie tous les commits accessible par l'une des deux référence, exclusivement.
+La dernière syntaxe majeure de sélection de plage de commits est la syntaxe triple-point, qui spécifie tous les commits accessible par l'une des deux références, exclusivement.
 Toujours avec l'exemple d'historique à la figure 6-1, si vous voulez voir ce qui ce trouve sur `master` ou `experiment` mais pas sur les 2, exécutez :
 
 	$ git log master...experiment
@@ -372,7 +372,7 @@ Si vous souhaitez enlever de la zone d'attente le fichier TODO, utilisez `3` (ou
 	Revert>> [enter]
 	reverted one path
 
-Un aperçu rapide à votre statut Git et vous pouvez voir que vous avez enlever de la zone d'attente le fichier TODO :
+Un aperçu rapide à votre statut Git et vous pouvez voir que vous avez enlevé de la zone d'attente le fichier TODO :
 
 	*** Commands ***
 	  1: status     2: update      3: revert     4: add untracked
@@ -467,7 +467,7 @@ Enfin, vous pouvez vous passer du mode interactif pour mettre partiellement un f
 
 ## La remise ##
 
-Souvent, lorsque vous avez travaillé sur une partie de votre projet, les choses sont dans un état instable mais vous voulez changer de branches pour un peu de travailler sur autre chose.
+Souvent, lorsque vous avez travaillé sur une partie de votre projet, les choses sont dans un état instable mais vous voulez changer de branche pour un peu de travailler sur autre chose.
 Le problème est que vous ne voulez pas consigner (commit) un travail à moitié fait seulement pour pouvoir y revenir plus tard.
 La réponse à cette problématique est la commande `git stash`.
 
@@ -517,7 +517,7 @@ Pour voir quelles remises vous avez sauvegardées, vous pouvez utiliser la comma
 Dans ce cas, deux remises on été créées précédemment, vous avez donc accès à trois travaux remisés différents.
 Vous pouvez réappliquer celui que vous venez juste de remisé en utilisant la commande affichée dans la sortie d'aide de la première commande de remise : `git stash apply`.
 Si vous voulez appliquer une remise plus ancienne, vous pouvez la spécifier en la nommant, comme ceci : `git stash apply stash@{2}`.
-Si vous ne spécifier pas une remise, Git présume que vous voulez la remise la plus récente et essayes de l'appliquer.
+Si vous ne spécifier pas une remise, Git présume que vous voulez la remise la plus récente et essaie de l'appliquer.
 
 	$ git stash apply
 	# On branch master
@@ -550,7 +550,7 @@ Si vous exécutez cela à la place de la commande précédente, vous vous retrou
 	#      modified:   lib/simplegit.rb
 	#
 
-L'option `apply` essaye seulement d'appliquer le travail remisé, vous aurez toujours la remise dans votre pile.
+L'option `apply` essaie seulement d'appliquer le travail remisé, vous aurez toujours la remise dans votre pile.
 Pour la supprimer, vous pouvez exécuter `git stash drop` avec le nom de la remise à supprimer :
 
 	$ git stash list
@@ -583,7 +583,7 @@ Par exemple :
 
 ### Créer une branche depuis une remise ###
 
-Si vous remiser votre travail, l'oubliez pendant un temps en continuant sur la branche où vous avez créé la remise, vous pouvez avoir un problème en réappliquant le travail.
+Si vous remisez votre travail, l'oubliez pendant un temps en continuant sur la branche où vous avez créé la remise, vous pouvez avoir un problème en réappliquant le travail.
 Si l'application de la remise essaye de modifier un fichier que vous avez modifié depuis, vous allez obtenir des conflits de fusion et vous devrez essayer de les résoudre.
 Si vous voulez un moyen plus facile de tester une nouvelle fois les modifications remisées, vous pouvez exécuter `git stash branch`, qui créera une nouvelle branche à votre place, récupérant le commit où vous étiez lorsque vous avez créé la remise, réappliquera votre travail dedans, et supprimera finalement votre remise si cela a réussi :
 
@@ -602,16 +602,16 @@ Si vous voulez un moyen plus facile de tester une nouvelle fois les modification
 	#
 	Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 
-C'est un bon raccourci pour récupérer du travail remisé facilement et de pouvoir travailler dessus dans une nouvelle branche.
+C'est un bon raccourci pour récupérer facilement du travail remisé et pouvoir travailler dessus dans une nouvelle branche.
 
 ## Réécrire l'historique ##
 
 Bien souvent, lorsque vous travaillez avec Git, vous souhaitez modifier votre historique de consignation pour une raison quelconque.
 Une des choses merveilleuses de Git est qu'il vous permet de prendre des décisions le plus tard possible.
-Vous pouvez décider quels fichiers vont dans quel commit avant que vous ne consigniez la zone d'attente, vous pouvez décider que vous ne voulez pas encore montrer que vous travailler sur quelque chose avec les remises, et vous pouvez réécrire les commits afin déjà sauvegardé pour qu'ils ressemblent à quelque chose d'autre.
+Vous pouvez décider quels fichiers vont dans quel commit avant que vous ne consigniez la zone d'attente, vous pouvez décider que vous ne voulez pas encore montrer que vous travaillez sur quelque chose avec les remises, et vous pouvez réécrire les commits déjà sauvegardés pour qu'ils ressemblent à quelque chose d'autre.
 Cela peut signifier changer l'ordre des commits, modifier les messages ou modifier les fichiers appartenant au commit, rassembler ou séparer des commits, ou supprimer complètement des commits; tout ceci avant de les partager avec les autres.
 
-Danc cette section, nous expliquerons comment accomplir ces tâches très utiles pour que vous pussiez faire ressembler votre historique de consignation de la manière que vous voulez avant de le partager avec autrui.
+Dans cette section, nous expliquerons comment accomplir ces tâches très utiles pour que vous puissiez faire ressembler votre historique de consignation de la manière que vous voulez avant de le partager avec autrui.
 
 ### Modifier la dernière consignation ###
 
@@ -625,7 +625,7 @@ Si vous voulez seulement modifier votre dernier message de consignation, c'est v
 Cela vous ouvre votre éditeur de texte contenant votre dernier message, prêt à être modifié.
 Lorsque vous sauvegardez et fermez l'éditeur, Git enregistre la nouvelle consignation contenant le message et en fait votre dernier commit.
 
-Si vous avez vouler modifier le contenu de votre consignation, en ajoutant ou modifiant des fichiers, sûrement parce que vous avez oublié d'ajouter les fichiers nouvellement créés quand vous avez consigné la première fois, la procédure fonctionne grosso-modo de la même manière.
+Si vous voulez modifier le contenu de votre consignation, en ajoutant ou modifiant des fichiers, sûrement parce que vous avez oublié d'ajouter les fichiers nouvellement créés quand vous avez consigné la première fois, la procédure fonctionne grosso-modo de la même manière.
 Vous mettez les modifications que vous voulez en attente en exécutant `git add` ou `git rm`, et le prochain `git commit --amend` prendra votre zone d'attente courante et en fera le contenu de votre nouvelle consignation.
 
 Vous devez être prudent avec cette technique car votre modification modifie également le SHA-1 du commit.
@@ -634,7 +634,7 @@ Ne modifiez pas votre dernière consignation si vous l'avez déjà publié !
 
 ### Modifier plusieurs messages de consignation ###
 
-Pour modifier une consignation qui est plus loin dans votre historique, vous devez utilisez des outils plus complexes.
+Pour modifier une consignation qui est plus loin dans votre historique, vous devez utiliser des outils plus complexes.
 Git ne contient pas d'outil de modification d'historique, mais vous pouvez utiliser l'outil `rebase` pour rebaser une suite de commits depuis la branche HEAD plutôt que de les déplacer vers une autre branche.
 Avec l'outil rebase interactif, vous pouvez vous arrêter après chaque commit que vous voulez modifiez et changer le message, ajouter des fichiers ou quoique ce soit que vous voulez.
 Vous pouvez exécuter rebase interactivement en ajoutant l'option `-i` à `git rebase`.
@@ -676,7 +676,7 @@ Si vous exécutez la commande `log`, vous verrez quelque chose de ce genre :
 
 Remarquez l'ordre inverse.
 Le rebasage interactif va créer un script à exécuter.
-Il commencera au commit que vous spécifiez sur la ligne de commande (`HEAD~3`) et refait les modifications introduites dans chacun des commits du début à la fin.
+Il commencera au commit que vous spécifiez sur la ligne de commande (`HEAD~3`) et refera les modifications introduites dans chacun des commits du début à la fin.
 Il ordonne donc le plus vieux au début, plutôt que le plus récent, car c'est celui qu'il refera en premier.
 
 Vous devez éditer le script afin qu'il s'arrête au commit que vous voulez modifier.
@@ -709,7 +709,7 @@ Puis exécutez :
 
 	$ git rebase --continue
 
-Cette commande appliquera les deux autres commits automatiquement, c'est fait.
+Cette commande appliquera les deux autres commits automatiquement.
 Si vous remplacez "pick" en "edit" sur plusieurs lignes, vous pouvez répéter ces étapes pour chaque commit que vous avez remplacé pour modification.
 Chaque fois, Git s'arrêtera, vous laissant modifier le commit et continuera lorsque vous aurez fini.
 
@@ -770,7 +770,7 @@ Lorsque vous sauvegardez cela, vous obtenez un seul commit amenant les modificat
 
 ### Diviser un commit ###
 
-Pour diviser un commit, il doit être défait, puis partiellement mis en zone d'attente et consigner autant de fois que vous voulez pour en finir avec lui.
+Pour diviser un commit, il doit être défait, puis partiellement mis en zone d'attente et consigné autant de fois que vous voulez pour en finir avec lui.
 Par exemple, supposons que vous voulez diviser le commit du milieu dans l'exemple des trois commits précédents.
 Plutôt que "updated README formatting and added blame", vous voulez le diviser en deux commits : "updated README formatting" pour le premier, et "added blame" pour le deuxième.
 Vous pouvez le faire avec le script `rebase -i` en remplaçant l'instruction sur le commit que vous voulez divisez en "edit" :
@@ -812,7 +812,7 @@ Vous allez maintenant apprendre quelques usages communs pour vous donner une id�
 
 Cela arrive asser fréquemment.
 Quelqu'un a accidentellement commité un énorme fichier binaire avec une commande `git add .` irréfléchie, and vous voulez le supprimer partout.
-Vous avez peut-être consigné un fichier contenant un mot de passe, et que vous voulez rendre votre projet open source.
+Vous avez peut-être consigné un fichier contenant un mot de passe, et vous voulez rendre votre projet open source.
 `filter-branch` est l'outil que vous voulez probablement utiliser pour nettoyer votre historique entier.
 Pour supprimer un fichier nommé "passwords.txt" de tout votre historique, vous pouvez utiliser l'option `--tree-filter` de `filter-branch` :
 
@@ -822,15 +822,15 @@ Pour supprimer un fichier nommé "passwords.txt" de tout votre historique, vous 
 
 L'option `--tree-filter` exécute la commande spécifiée pour chaque commit et les reconsigne ensuite
 Dans le cas présent, vous supprimez le fichier nommé "passwords.txt" de chaque contenu, qu'il existait ou non.
-Si vous voulez supprimez tous les fichiers temporaires des éditeurs consignés accidentellement, vous pouvez exécuter une commande telle que `git filter-branch --tree-filter 'rm -f *~' HEAD`.
+Si vous voulez supprimer tous les fichiers temporaires des éditeurs consignés accidentellement, vous pouvez exécuter une commande telle que `git filter-branch --tree-filter 'rm -f *~' HEAD`.
 
 Vous pourrez alors regarder Git réécrire l'arbre des commits et reconsigner à chaque fois, pour finir en modifiant la référence de la branche.
-C'est généralement une bonne idée de le faire dans un branche de test puis de faire une forte réinitialisation (hard-reset) de votre branche `master` si le résultat vous convient.
+C'est généralement une bonne idée de le faire dans une branche de test puis de faire une réinitialisation forte (hard-reset) de votre branche `master` si le résultat vous convient.
 Pour exécuter `filter-branch` sur toutes vos branches, vous pouvez ajouter `--all` à la commande.
 
 #### Faire d'un sous-répertoire la nouvelle racine ####
 
-Supposons que vous avez importer votre projet depuis un autre système de gestion de configuration et que vous avez des sous-répertoires qui n'ont aucun sens (trunk, tags, etc).
+Supposons que vous avez importé votre projet depuis un autre système de gestion de configuration et que vous avez des sous-répertoires qui n'ont aucun sens (trunk, tags, etc).
 Si vous voulez faire en sorte que le sous-répertoire `trunk` soit la nouvelle racine de votre projet pour tous les commits, `filter-branch` peut aussi vous aider à le faire :
 
 	$ git filter-branch --subdirectory-filter trunk HEAD
@@ -1118,7 +1118,7 @@ Vous devez exécuter deux commandes : `git submodule init` pour initialiser votr
 	Resolving deltas: 100% (1951/1951), done.
 	Submodule path 'rack': checked out '08d709f78b8c5b0fbeb7821e37fa53e69afcf433'
 
-Votre répertoire `rack` est maintenant dans l'état exacte dans lequel il était la dernière fois que vous avez consigné.
+Votre répertoire `rack` est maintenant dans l'état exact dans lequel il était la dernière fois que vous avez consigné.
 Si un autre développeur modifie le code de `rack` et consigne, que vous récupériez (pull) cette référence et que vous fusionniez, vous obtiendrez quelque chose d'un peu étrange :
 
 	$ git merge origin/master

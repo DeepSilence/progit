@@ -108,7 +108,7 @@ Maintenant, vous pouvez signer vos balises sans devoir spécifier votre clé à 
 #### core.excludesfile ####
 
 Comme décrit au chapitre 2, vous pouvez ajouter des patrons dans le fichier `.gitignore` de votre projet pour indiquer à Git de ne pas considérer certains fichiers comme non suivis ou les indexer lorsque vous lancez `git add` sur eux.
-Cependant, si vous souhaitez qu'un autre fichier à l'extérieur du projet contiennent ces informations ou d'autres supplémentaires, vous pouvez indiquer à Git où se trouve ce fichier grâce au paramètre `core.excludesfile`.
+Cependant, si vous souhaitez qu'un autre fichier à l'extérieur du projet contienne ces informations ou d'autres supplémentaires, vous pouvez indiquer à Git où se trouve ce fichier grâce au paramètre `core.excludesfile`.
 Fixez le simplement sur le chemin du fichier qui contient les informations similaires à celles de `.gitignore`.
 
 #### help.autocorrect ####
@@ -252,10 +252,10 @@ Si KDiff3 ne vous intéresse pas pour gérer les différences mais seulement pou
 
 Si vous lancez ceci au lieu de modifier les fichiers `extMerge` ou `extDiff`, Git utilisera KDif3 pour les résolutions de fusion et l'outil diff normal de Git pour les différences.
 
-### Formatage and espaces blancs ###
+### Formatage et espaces blancs ###
 
-Les problèmes de formatage et de blancs font partie des plus subtiles et frustrants que les développeurs rencontrent lorsqu'ils collaborent, spécifiquement sur plusieurs plates-formes.
-Il est très facile d'introduire des modifications subtiles de blancs lors de soumission de patchs ou d'autres modes de collaboration car les éditeurs de textes les insèrent silencieusement ou les programmeurs Windows ajoutent de retour chariot à la fin des lignes qu'il modifient.
+Les problèmes de formatage et de blancs font partie des plus subtils et frustrants problèmes que les développeurs rencontrent lorsqu'ils collaborent, spécifiquement sur plusieurs plates-formes.
+Il est très facile d'introduire des modifications subtiles de blancs lors de soumission de patchs ou d'autres modes de collaboration, car les éditeurs de textes les insèrent silencieusement, ou les programmeurs Windows ajoutent des retour chariot à la fin des lignes qu'il modifient.
 Git dispose de quelques options de configuration pour traiter ces problèmes.
 
 #### core.autocrlf ####
@@ -289,7 +289,7 @@ Git est paramétré par défaut pour détecter et corriger certains problèmes d
 Il peut rechercher quatre problèmes de base de blancs.
 La correction de deux problèmes est activée par défaut et peut être désactivée et celle des deux autres n'est pas activée par défaut mais peut être activée.
 
-Les deux activées par défaut sont `trailing-space` qui détecter les espaces en fin de ligne et `space-before-tab` qui recherche les espaces avant les tabulations au début d'une ligne.
+Les deux activées par défaut sont `trailing-space` qui détecte les espaces en fin de ligne et `space-before-tab` qui recherche les espaces avant les tabulations au début d'une ligne.
 
 Les deux autres qui sont désactivées par défaut mais peuvent être activées sont `indent-with-non-tab` qui recherche des lignes qui commencent par huit espaces ou plus au lieu de tabulations et `cr-at-eol` qui indique à Git que les « retour chariot » en fin de ligne sont acceptés.
 
@@ -685,7 +685,7 @@ Vous ne pouvez plus arrêter le processus de validation avec ce script.
 #### Autres crochets côté client ####
 
 Le crochet `pre-rebase` est invoqueé avant que vous ne rebasiez et peut interrompre le processus s'il sort avec un code d'erreur non nul.
-Vous pouvez utiliser ce crochet pour empêcher de rebase tout commit qui a déjà été poussé.
+Vous pouvez utiliser ce crochet pour empêcher de rebaser tout commit qui a déjà été poussé.
 C'est ce que fait le crochet d'exemple `pre-rebase` que Git installe, même s'il considère que la branche cible de publication s'appelle `next`.
 Il est très probable que vous ayez à changer ce nom pour celui que vous utilisez réellement en branche publique stable.
 
